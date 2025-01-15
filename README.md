@@ -1,8 +1,7 @@
-# React + Vite
+JeeNeeTard 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web app which uses React Hooks, Tailwind and Local Storage to manage a to do list of the topics in JEE and NEET along with their respective weightage.
 
-Currently, two official plugins are available:
+It has a simple UI and due to local storage, the changes and progress is stored locally as the state persisits.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Version 1 consists of only UI and Ux related to topics according to subject and the current progress.
