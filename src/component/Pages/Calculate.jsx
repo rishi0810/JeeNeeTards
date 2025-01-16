@@ -53,7 +53,7 @@ function Calculate({ topics, name, onProgressChange, color }) {
         </h3>
         <div className="w-full bg-white bg-opacity-30 rounded-full h-1">
           <div
-            className={`bg-${color} h-1 rounded-full transition-all duration-500 ease-in-out`}
+            className={`${color} h-1 rounded-full transition-all duration-500 ease-in-out`}
             style={{ width: `${calculateProgress()}%` }}
           ></div>
         </div>
