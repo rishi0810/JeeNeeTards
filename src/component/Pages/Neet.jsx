@@ -11,104 +11,157 @@ function Neet() {
   const [physics_marks, updatephysicsmarks] = useState(0);
   const [total_marks, updatetotalmarks] = useState(0);
   
-  
-  useEffect(()=>{
-    
-    updatetotalmarks(Math.round((botany_marks/100)*180)+Math.round((chemistry_marks/100)*180)+Math.round((zoology_marks/100)*180)+Math.round((physics_marks/100)*180));
-
-  }, [botany_marks,chemistry_marks,zoology_marks,physics_marks])
+  useEffect(() => {
+    updatetotalmarks(
+      Math.round((botany_marks/100)*180) +
+      Math.round((chemistry_marks/100)*180) +
+      Math.round((zoology_marks/100)*180) +
+      Math.round((physics_marks/100)*180)
+    );
+  }, [botany_marks, chemistry_marks, zoology_marks, physics_marks]);
 
   return (
-    <div className="w-full bg-gray-950 min-h-screen flex flex-row justify-evenly items-baseline gap-20 p-5">
-      <div className="flex flex-col gap-2 w-1/2 p-3 items-center bg-white bg-opacity-10 rounded">
-        <span className="text-2xl p-3 font-poppins font-semibold text-blue-700 self-start">
-          NEET
-        </span>
-        <Calculate
-          topics={Botany}
-          name="Botany"
-          onProgressChange={updatebotanymarks}
-          color = "bg-blue-700"
-        />
-        <Calculate
-          topics={Chemistry}
-          name="Chemistry"
-          onProgressChange={updatechemistrymarks}
-          color = "bg-blue-700"
-        />
-        <Calculate
-          topics={Zoology}
-          name="Zoology"
-          onProgressChange={updatezoologymarks}
-          color = "bg-blue-700"
-        />
-        <Calculate
-          topics={Physics}
-          name="Physics"
-          onProgressChange={updatephysicsmarks}
-          color = "bg-blue-700"
-        />
-      </div>
-      {/* 600 white */}
-      <div className="flex flex-col gap-5 p-5 text-white bg-white bg-opacity-10 rounded ">
-        <span className="text-3xl">Subject Details</span>
-        <div className="flex flex-col gap-4 mt-5 bg-white bg-opacity-15 p-3 rounded">
-          <span className="bg-white bg-opacity-20 text-lg py-2 px-5 rounded shadow">
-            Total Marks: 720
-          </span>
-          
-          <div className="grid grid-cols-2 gap-3 p-3 bg-white bg-opacity-20 rounded">
-          <CircularProgressbar
-              className="size-36"
-              styles={buildStyles({
-                textColor: "#f0f9ff",
-                pathColor : "#2d37ed",
-                trailColor : "#d4d4d6",
-                textSize : 12
-                
-              })}
-              value={botany_marks}
-              text={`Botany : ${Math.round((botany_marks/100)*180)}`}
-            />
-            <CircularProgressbar
-            className="size-32"
-              styles={buildStyles({
-                textColor: "#f0f9ff",
-                pathColor : "#2d37ed",
-                trailColor : "#d4d4d6",
-                textSize : 12
-              })}
-              value={chemistry_marks}
-              text={`Chemistry ${Math.round((chemistry_marks/100)*180)}`}
-            />
-            <CircularProgressbar
-            className="size-32"
-              styles={buildStyles({
-                textColor: "#f0f9ff",
-                pathColor : "#2d37ed",
-                trailColor : "#d4d4d6", 
-                textSize : 12               
-              })}
-              value={zoology_marks}
-              text={`Zoology : ${Math.round((zoology_marks/100)*180)}`}
-            />
-            <CircularProgressbar
-            className="size-32"
-              styles={buildStyles({
-                textColor: "#f0f9ff",
-                pathColor : "#2d37ed",
-                trailColor : "#d4d4d6",   
-                textSize : 12             
-              })}
-              value={physics_marks}
-              text={`Physics : ${Math.round((physics_marks/100)*180)}`}
+    <div className="w-full bg-gradient-to-b from-zinc-950 to-zinc-900 min-h-screen flex flex-col md:flex-row justify-evenly items-start gap-8 p-5">
+      {/* Subjects Section */}
+      <div className="flex flex-col gap-4 w-full md:w-1/2 p-6 items-center backdrop-blur-sm bg-white/5 rounded-3xl border border-white/10 shadow-xl transition-all duration-300 hover:bg-white/[0.07]">
+        <div className="w-full flex items-center justify-between mb-4">
+          <div className="space-y-1">
+            <span className="text-3xl font-semibold text-blue-600 bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+              NEET
+            </span>
+            <p className="text-slate-400 text-sm">Track your preparation progress</p>
+          </div>
+          <div className="text-right">
+            <div className="text-slate-300 text-sm font-medium">Maximum Score</div>
+            <div className="text-blue-500 font-semibold">720</div>
+          </div>
+        </div>
+        
+        <div className="space-y-6 w-full [&>*]:animate-slideDown rounded-xl">
+          <div className="space-y-2 rounded-xl">
+         
+            <Calculate
+              topics={Botany}
+              name="Botany"
+              onProgressChange={updatebotanymarks}
+              color="bg-blue-700"
+              className="rounded-xl"
             />
           </div>
 
-          <span className="px-5 py-2 text-lg bg-white bg-opacity-20 rounded shadow">Current Marks : {total_marks}</span>
+          <div className="space-y-2">
+          
+            <Calculate
+              topics={Chemistry}
+              name="Chemistry"
+              onProgressChange={updatechemistrymarks}
+              color="bg-blue-700"
+            />
+          </div>
+
+          <div className="space-y-2">
             
+            <Calculate
+              topics={Zoology}
+              name="Zoology"
+              onProgressChange={updatezoologymarks}
+              color="bg-blue-700"
+            />
+          </div>
+
+          <div className="space-y-2">
+          
+            <Calculate
+              topics={Physics}
+              name="Physics"
+              onProgressChange={updatephysicsmarks}
+              color="bg-blue-700"
+            />
+          </div>
         </div>
       </div>
+
+      {/* Progress Section */}
+      <div className="flex flex-col gap-6 p-6 w-full md:w-auto backdrop-blur-sm bg-white/5 rounded-3xl border border-white/10 shadow-xl transition-all duration-300 hover:bg-white/[0.07]">
+        <div className="space-y-1">
+          <h2 className="text-3xl font-semibold bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-transparent">
+            Subject Details
+          </h2>
+          <p className="text-slate-400 text-sm">Your current progress status</p>
+        </div>
+        
+        <div className="flex flex-col gap-6 bg-white/5 p-6 rounded-2xl">
+          <div className="flex items-center justify-between bg-white/10 px-6 py-4 rounded-xl shadow-lg">
+            <span className="text-slate-300">Maximum Marks</span>
+            <span className="text-white font-semibold text-lg">720</span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-8 p-6 bg-white/10 rounded-xl">
+            <div className="transition-all duration-300 hover:scale-105 hover:-rotate-6">
+              <CircularProgressbar
+                className="w-36 h-36"
+                styles={buildStyles({
+                  textColor: "#f0f9ff",
+                  pathColor: "#2563eb",
+                  trailColor: "rgba(255,255,255,0.1)",
+                  textSize: 12,
+                  rotation: 0.25,
+                })}
+                value={botany_marks}
+                text={`Botany: ${Math.round((botany_marks/100)*180)}`}
+              />
+            </div>
+            <div className="transition-all duration-300 hover:scale-105 hover:rotate-6">
+              <CircularProgressbar
+                className="w-36 h-36"
+                styles={buildStyles({
+                  textColor: "#f0f9ff",
+                  pathColor: "#2563eb",
+                  trailColor: "rgba(255,255,255,0.1)",
+                  textSize: 12,
+                  rotation: 0.25,
+                })}
+                value={chemistry_marks}
+                text={`Chem: ${Math.round((chemistry_marks/100)*180)}`}
+              />
+            </div>
+            <div className="transition-all duration-300 hover:scale-105 hover:-rotate-6">
+              <CircularProgressbar
+                className="w-36 h-36"
+                styles={buildStyles({
+                  textColor: "#f0f9ff",
+                  pathColor: "#2563eb",
+                  trailColor: "rgba(255,255,255,0.1)",
+                  textSize: 12,
+                  rotation: 0.25,
+                })}
+                value={zoology_marks}
+                text={`Zoo: ${Math.round((zoology_marks/100)*180)}`}
+              />
+            </div>
+            <div className="transition-all duration-300 hover:scale-105 hover:rotate-6">
+              <CircularProgressbar
+                className="w-36 h-36"
+                styles={buildStyles({
+                  textColor: "#f0f9ff",
+                  pathColor: "#2563eb",
+                  trailColor: "rgba(255,255,255,0.1)",
+                  textSize: 12,
+                  rotation: 0.25,
+                })}
+                value={physics_marks}
+                text={`Phy: ${Math.round((physics_marks/100)*180)}`}
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between bg-white/10 px-6 py-4 rounded-xl shadow-lg">
+            <span className="text-slate-300">Current Score</span>
+            <span className="text-white font-semibold text-lg">{total_marks}</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }

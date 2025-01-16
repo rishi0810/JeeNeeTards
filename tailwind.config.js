@@ -12,7 +12,12 @@ export default {
 			geist : [
 				'Geist',
 				'serif'
+			],
+			poppins_bold : [
+				'Poppins-bold',
+				'sans-serif'
 			]
+
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

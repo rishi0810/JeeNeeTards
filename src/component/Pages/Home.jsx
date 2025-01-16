@@ -5,9 +5,9 @@ import { NavLink } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="bg-gray-950 flex flex-col justify-evenly items-center gap-40 w-full py-40">
+    <div className="bg-zinc-950 flex flex-col justify-evenly items-center gap-40 w-full py-40">
       <section className="flex flex-col gap-3 items-center">
-        <p className="text-4xl w-4/6 text-white text-center font-serif font-semibold">
+        <p className="text-4xl w-4/6 text-white text-center font-poppins font-bold">
           <span className="text-yellow-500">Jee</span>
           <span className="text-blue-700">NeeT</span>
           <span className="text-white mr-2">ards</span>

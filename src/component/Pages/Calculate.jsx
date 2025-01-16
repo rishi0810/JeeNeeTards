@@ -63,7 +63,7 @@ function Calculate({ topics, name, onProgressChange, color }) {
         <div className="flex flex-col gap-2 w-full rounded p-3">
           {topics.map((topic, index) => (
             <div
-              className={`flex justify-between w-full items-center p-2 bg-white ${
+              className={`flex justify-between w-full items-center rounded-lg p-2 bg-white ${
                 completedWeightage.includes(index)
                   ? "bg-opacity-5 line-through decoration-white"
                   : "bg-opacity-25"

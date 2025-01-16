@@ -1,42 +1,77 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { SquareLibrary } from 'lucide-react';
-import {NavLink, Link } from 'react-router-dom'
 
-function Header() {
+const Header = () => {
+  const [activePath, setActivePath] = useState('/');
+
+  const NavLink = ({ href, children }) => {
+    const isActive = activePath === href;
+
+    return (
+      <a
+        href={href}
+        onClick={(e) => {
+          e.preventDefault();
+          setActivePath(href);
+        }}
+        className={`text-slate-300 text-lg font-bold p-2 rounded-lg transition-colors duration-200 ${isActive ? 'bg-white/10 text-white' : 'hover:bg-white/5 hover:text-white'
+          }`}
+      >
+        {children}
+      </a>
+    );
+  };
+
   return (
-    <header className="sticky top-0 bg-gray-950 flex flex-row justify-between py-3 px-24 mx-auto z-50 border-b border-slate-800">
-      <div className='flex flex-row gap-2'> 
-        <SquareLibrary className='text-slate-300 size-8'/>
-        <NavLink to={'/'} className="text-xl font-poppins text-slate-300 p-1 pb-2 font-semibold">
-        <span className="text-yellow-500">Jee</span>
-            <span className="text-blue-700">NeeT</span>
-            <span className="text-white">ards</span>
-        </NavLink>
+    <>
+      <div className="h-32 bg-zinc-950">
       </div>
 
-      <div className="flex flex-row gap-3">
-            <NavLink 
-            to="courses"
+      <header className="fixed top-6 left-0 right-0 mx-auto max-w-7xl z-50 px-4">
+        <div className="backdrop-blur-md bg-white/5 rounded-2xl shadow-lg border border-white/10 flex flex-row justify-between py-4 px-8 hover:shadow-xl hover:bg-white/[0.07] transition-all duration-300">
+          <div className="flex flex-row items-center gap-2">
+            <SquareLibrary className="text-slate-300" size={32} />
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                setActivePath('/');
+              }}
+              className="text-xl font-bold p-1"
+            >
+              <span className="text-yellow-500">Jee</span>
+              <span className="text-blue-700">NeeT</span>
+              <span className="text-white">ards</span>
+            </a>
+          </div>
+
+          <nav className="flex flex-row items-center gap-3">
+          <NavLink 
+            to="/courses"
            className = {`text-slate-300 text-lg font-sans p-1 hover:text-slate-500`}>
             Courses
             </NavLink>
+            <a
+              href="https://www.linkedin.com/in/rishiraj2003/"
+              className="text-slate-300 text-lg font-bold p-2 rounded-lg hover:bg-white/5 hover:text-white transition-colors duration-200"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Contact
+            </a>
+            <a
+              href="https://github.com/rishi0810"
+              className="text-slate-300 text-lg font-bold p-2 rounded-lg hover:bg-white/5 hover:text-white transition-colors duration-200"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Github
+            </a>
+          </nav>
+        </div>
+      </header>
+    </>
+  );
+};
 
-          <NavLink
-          className = {`text-slate-300 text-lg font-sans p-1 hover:text-slate-500`}>
-            Contact Us
-          </NavLink>
-          <Link
-          to = "https://github.com/rishi0810"
-           className = {`text-slate-300 text-lg font-sans p-1 hover:text-slate-500`}
-           rel="noopener noreferrer"
-           >
-            Github
-          </Link>
-          
-      </div>
-
-    </header>
-  )   
-}
-
-export default Header
+export default Header;
