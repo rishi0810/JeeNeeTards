@@ -28,25 +28,25 @@ function Neet() {
           topics={Botany}
           name="Botany"
           onProgressChange={updatebotanymarks}
-          color = "blue-700"
+          color = "bg-blue-700"
         />
         <Calculate
           topics={Chemistry}
           name="Chemistry"
           onProgressChange={updatechemistrymarks}
-          color = "blue-700"
+          color = "bg-blue-700"
         />
         <Calculate
           topics={Zoology}
           name="Zoology"
           onProgressChange={updatezoologymarks}
-          color = "blue-700"
+          color = "bg-blue-700"
         />
         <Calculate
           topics={Physics}
           name="Physics"
           onProgressChange={updatephysicsmarks}
-          color = "blue-700"
+          color = "bg-blue-700"
         />
       </div>
       {/* 600 white */}
