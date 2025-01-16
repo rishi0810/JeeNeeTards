@@ -76,9 +76,9 @@ function Calculate({ topics, name, onProgressChange, color }) {
                   checked={completedWeightage.includes(index)}
                   onChange={() => handleCheckboxChange(index)}
                 />
-                <span className="text-white text-sm px-2">{topic.topic}</span>
+                <span className="text-white font-poppins text-sm pl-4 px-2">{topic.topic}</span>
               </span>
-              <span className="text-white text-sm">{topic.weightage}</span>
+              <span className="text-white font-poppins text-sm pr-5">{topic.weightage}</span>
             </div>
           ))}
         </div>

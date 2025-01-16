@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 function Footer() {
   return (
-    <footer className="relative bottom-0 bg-slate-950 text-white border-t border-slate-800 py-4 px-24 w-full text-center">
+    <footer className="relative bottom-0 bg-zinc-900 text-white border-t border-slate-800 py-4 px-24 w-full text-center">
       <div className="flex items-center justify-center px-10">
       <span class="material-symbols-outlined">
             copyright

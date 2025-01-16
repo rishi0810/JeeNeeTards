@@ -15,7 +15,7 @@ function Home() {
           <span className="text-yellow-500">JEE</span> and{" "}
           <span className="text-blue-700">NEET</span> aspirants.
         </p>
-        <div className="text-lg w-4/6 text-white font-thin text-center font-serif">
+        <div className="text-lg w-4/6 text-white font-thin text-center font-poppins ">
           Here, the syllabus is in the form of an intuitive to-do-list, progress
           is trackable and there are content at your fingertips related to notes
           and PYQs
