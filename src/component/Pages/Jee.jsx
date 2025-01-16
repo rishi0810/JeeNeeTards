@@ -28,19 +28,19 @@ function Neet() {
           topics={Mathematics}
           name="Mathematics"
           onProgressChange={updatemathmarks}
-          color = "yellow-500"
+          color = "bg-yellow-500"
         />
         <Calculate
           topics={Chemistry}
           name="Chemistry"
           onProgressChange={updatechemistrymarks}
-          color = "yellow-500"
+          color = "bg-yellow-500"
         />
         <Calculate
           topics={Physics}
           name="Physics"
           onProgressChange={updatephysicsmarks}
-          color = "yellow-500"
+          color = "bg-yellow-500"
         />
       </div>
       <div className="flex flex-col gap-5 p-5 text-white bg-white bg-opacity-10 rounded ">
