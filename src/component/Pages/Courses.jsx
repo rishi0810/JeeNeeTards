@@ -2,9 +2,9 @@ import React from 'react'
 import { NavLink } from "react-router-dom";
 function Courses() {
   return (
-    <section className="flex flex-col gap-10 items-center justify-center min-h-screen bg-zinc-950">
+    <section className="flex flex-col gap-10 items-center justify-center min-h-screen bg-gradient-to-b from-zinc-950 to-zinc-900">
       
-    <h4 className="text-white text-center text-5xl font-poppins font-bold">
+    <h4 className="text-white text-center md:text-5xl text-4xl  font-poppins font-bold">
       Pick your course. 
     </h4>
     <div className="flex justify-center items-center gap-20 w-4/6 py-10">

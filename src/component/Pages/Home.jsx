@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="bg-zinc-950 flex flex-col justify-evenly items-center gap-40 w-full py-40">
+    <div className="bg-gradient-to-b from-zinc-950 to-zinc-900 flex flex-col justify-evenly items-center gap-40 w-full py-40">
       <section className="flex flex-col gap-3 items-center">
         <p className="text-4xl w-4/6 text-white text-center font-poppins font-bold">
           <span className="text-yellow-500">Jee</span>
@@ -28,12 +28,12 @@ function Home() {
         Select Courses
       </NavLink>
       
-      <section className="flex flex-col gap-10 px-20 justify-center items-center w-full">
+      <section className="flex flex-col gap-10 px-10 md:px-20 justify-center items-stretch md:items-center w-full">
         <h1 className="text-white font-poppins font-semibold text-3xl text-center">
           Let us handle the complications
         </h1>
 
-        <div className="grid grid-cols-3 gap-x-20 gap-y-10 text-white items-center ">
+        <div className="flex flex-col gap-5 items-stretch md:grid md:grid-cols-3 md:gap-x-20 md:gap-y-10 text-white md:items-center ">
           <div className="flex py-3 px-3 gap-3 bg-opacity-5 bg-white rounded-md shadow-lg">
             <ListCheck className="size-9 mt-1" />
             <div className="flex flex-col gap-1 bg-opacity-5pl-3">
@@ -84,7 +84,7 @@ function Home() {
             </div>
           </div>
           <div className="flex py-2 px-3 gap-3 bg-opacity-5 bg-white rounded-md shadow-lg">
-            <Users className="size-9 mt-1"/>
+            <Users className="size-9 md:mt-1 mt-5"/>
             <div className="flex flex-col gap-1 bg-opacity-5pl-3">
             <p className="text-md font-normal">
               Free Materials and Collaborative Approach
