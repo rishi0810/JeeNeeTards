@@ -70,12 +70,26 @@ function Calculate({ topics, name, onProgressChange, color }) {
               }`}
               key={index}
             >
-              <span>
-                <input
-                  type="checkbox"
-                  checked={completedWeightage.includes(index)}
-                  onChange={() => handleCheckboxChange(index)}
-                />
+              <span className="flex items-center">
+                <label className="relative flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="sr-only"
+                    checked={completedWeightage.includes(index)}
+                    onChange={() => handleCheckboxChange(index)}
+                  />
+                  <div className={`w-5 h-5 border-2 rounded-sm transition-all duration-200 ease-in-out ${
+                    completedWeightage.includes(index) 
+                      ? 'border-white bg-white' 
+                      : 'border-white'
+                  }`}>
+                    {completedWeightage.includes(index) && (
+                      <svg className="w-4 h-4 text-black" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    )}
+                  </div>
+                </label>
                 <span className="text-white font-poppins text-sm pl-4 px-2">{topic.topic}</span>
               </span>
               <span className="text-white font-poppins text-sm pr-5">{topic.weightage}</span>

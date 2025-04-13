@@ -6,11 +6,11 @@ function App() {
 
 
   return (
-  <>
+  <div style={{ userSelect: 'none' }}>
   <Header />
   <Outlet />
   <Footer/>
-  </>
+  </div>
     
   )
 }
