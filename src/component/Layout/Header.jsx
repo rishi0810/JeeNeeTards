@@ -98,6 +98,7 @@ const Header = () => {
             <div className="absolute top-full right-0 mt-2 bg-zinc-900 rounded-lg shadow-lg border border-white/10 md:hidden w-2/5">
               <nav className="flex flex-col items-start gap-3 p-4 w-full">
                 <NavLink to="/courses">Courses</NavLink>
+                <NavLink to="/dashboard">Dashboard</NavLink>
                 <a
                   href="https://www.linkedin.com/in/rishiraj2003/"
                   onClick={closeMenu}

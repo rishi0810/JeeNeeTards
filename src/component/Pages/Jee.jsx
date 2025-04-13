@@ -4,11 +4,12 @@ import Calculate from "./Calculate";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-function Neet() {
+function Jee() {
   const [physics_marks, updatephysicsmarks] = useState(0);
   const [chemistry_marks, updatechemistrymarks] = useState(0);
   const [math_marks, updatemathmarks] = useState(0);
   const [total_marks, updatetotalmarks] = useState(0);
+  const [activeTab, setActiveTab] = useState("Mathematics");
 
   useEffect(() => {
     updatetotalmarks(physics_marks + chemistry_marks + math_marks);
@@ -31,35 +32,59 @@ function Neet() {
           </div>
         </div>
         
-        <div className="space-y-6 w-full [&>*]:animate-slideDown ">
-          <div className="space-y-2 ">
-           
-            <Calculate
-              topics={Mathematics}
-              name="Mathematics" 
-              onProgressChange={updatemathmarks}
-              color="bg-yellow-500"
-            />
-          </div>
+        {/* Subject Tabs */}
+        <div className="flex w-full border-b border-white/10 mb-4">
+          {["Mathematics", "Chemistry", "Physics"].map((subject) => (
+            <button
+              key={subject}
+              onClick={() => setActiveTab(subject)}
+              className={`px-4 py-2 font-medium transition-all duration-200 ${
+                activeTab === subject
+                  ? "text-yellow-500 border-b-2 border-yellow-500"
+                  : "text-slate-400 hover:text-slate-200"
+              }`}
+            >
+              {subject}
+            </button>
+          ))}
+        </div>
+        
+        <div className="space-y-6 w-full [&>*]:animate-slideDown">
+          {activeTab === "Mathematics" && (
+            <div className="space-y-2">
+              <Calculate
+                topics={Mathematics}
+                name="Mathematics" 
+                onProgressChange={updatemathmarks}
+                color="bg-yellow-500"
+                alwaysExpanded={true}
+              />
+            </div>
+          )}
 
-          <div className="space-y-2">
-         
-            <Calculate
-              topics={Chemistry}
-              name="Chemistry"
-              onProgressChange={updatechemistrymarks}
-              color="bg-yellow-500"
-            />
-          </div>
+          {activeTab === "Chemistry" && (
+            <div className="space-y-2">
+              <Calculate
+                topics={Chemistry}
+                name="Chemistry"
+                onProgressChange={updatechemistrymarks}
+                color="bg-yellow-500"
+                alwaysExpanded={true}
+              />
+            </div>
+          )}
 
-          <div className="space-y-2">
-            <Calculate
-              topics={Physics}
-              name="Physics"
-              onProgressChange={updatephysicsmarks}
-              color="bg-yellow-500"
-            />
-          </div>
+          {activeTab === "Physics" && (
+            <div className="space-y-2">
+              <Calculate
+                topics={Physics}
+                name="Physics"
+                onProgressChange={updatephysicsmarks}
+                color="bg-yellow-500"
+                alwaysExpanded={true}
+              />
+            </div>
+          )}
         </div>
       </div>
 
@@ -128,11 +153,9 @@ function Neet() {
             <span className="text-white font-semibold text-lg">{Math.round(total_marks)}</span>
           </div>
         </div>
-      </div>
-
-    
+      </div>    
     </div>
   );
 }
 
-export default Neet;
+export default Jee;

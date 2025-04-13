@@ -10,6 +10,7 @@ function Neet() {
   const [zoology_marks, updatezoologymarks] = useState(0);
   const [physics_marks, updatephysicsmarks] = useState(0);
   const [total_marks, updatetotalmarks] = useState(0);
+  const [activeTab, setActiveTab] = useState("Botany");
   
   useEffect(() => {
     updatetotalmarks(
@@ -37,47 +38,72 @@ function Neet() {
           </div>
         </div>
         
+        {/* Subject Tabs */}
+        <div className="flex w-full border-b border-white/10 mb-4">
+          {["Botany", "Chemistry", "Zoology", "Physics"].map((subject) => (
+            <button
+              key={subject}
+              onClick={() => setActiveTab(subject)}
+              className={`px-4 py-2 font-medium transition-all duration-200 ${
+                activeTab === subject
+                  ? "text-blue-500 border-b-2 border-blue-500"
+                  : "text-slate-400 hover:text-slate-200"
+              }`}
+            >
+              {subject}
+            </button>
+          ))}
+        </div>
+        
         <div className="space-y-6 w-full [&>*]:animate-slideDown rounded-xl">
-          <div className="space-y-2 rounded-xl">
-         
-            <Calculate
-              topics={Botany}
-              name="Botany"
-              onProgressChange={updatebotanymarks}
-              color="bg-blue-700"
-              className="rounded-xl"
-            />
-          </div>
+          {activeTab === "Botany" && (
+            <div className="space-y-2 rounded-xl">
+              <Calculate
+                topics={Botany}
+                name="Botany"
+                onProgressChange={updatebotanymarks}
+                color="bg-blue-700"
+                className="rounded-xl"
+                alwaysExpanded={true}
+              />
+            </div>
+          )}
 
-          <div className="space-y-2">
-          
-            <Calculate
-              topics={Chemistry}
-              name="Chemistry"
-              onProgressChange={updatechemistrymarks}
-              color="bg-blue-700"
-            />
-          </div>
+          {activeTab === "Chemistry" && (
+            <div className="space-y-2">
+              <Calculate
+                topics={Chemistry}
+                name="Chemistry"
+                onProgressChange={updatechemistrymarks}
+                color="bg-blue-700"
+                alwaysExpanded={true}
+              />
+            </div>
+          )}
 
-          <div className="space-y-2">
-            
-            <Calculate
-              topics={Zoology}
-              name="Zoology"
-              onProgressChange={updatezoologymarks}
-              color="bg-blue-700"
-            />
-          </div>
+          {activeTab === "Zoology" && (
+            <div className="space-y-2">
+              <Calculate
+                topics={Zoology}
+                name="Zoology"
+                onProgressChange={updatezoologymarks}
+                color="bg-blue-700"
+                alwaysExpanded={true}
+              />
+            </div>
+          )}
 
-          <div className="space-y-2">
-          
-            <Calculate
-              topics={Physics}
-              name="Physics"
-              onProgressChange={updatephysicsmarks}
-              color="bg-blue-700"
-            />
-          </div>
+          {activeTab === "Physics" && (
+            <div className="space-y-2">
+              <Calculate
+                topics={Physics}
+                name="Physics"
+                onProgressChange={updatephysicsmarks}
+                color="bg-blue-700"
+                alwaysExpanded={true}
+              />
+            </div>
+          )}
         </div>
       </div>
 
@@ -161,7 +187,6 @@ function Neet() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }
