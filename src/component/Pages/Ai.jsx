@@ -172,7 +172,7 @@ function Ai() {
             </div>
           )}
           {!loading && !error && explanation && (
-            <div className="prose prose-invert prose-lg max-w-none text-slate-300 prose-headings:text-blue-400 prose-strong:text-white prose-a:text-blue-400">
+            <div className="prose prose-invert prose-lg max-w-none text-slate-300 prose-headings:text-blue-400 prose-strong:text-white prose-a:text-blue-400 prose-table:border-white/20 prose-th:border-white/20 prose-td:border-white/20 prose-th:bg-white/5 prose-td:p-4 prose-th:p-4 prose-table:w-full prose-table:border-collapse">
               {/* Use ReactMarkdown to render the response */}
               <ReactMarkdown>{explanation}</ReactMarkdown>
             </div>

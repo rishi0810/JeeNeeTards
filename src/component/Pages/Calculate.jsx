@@ -10,6 +10,8 @@ function Calculate({ topics, name, onProgressChange, color, alwaysExpanded = fal
     return savedState ? JSON.parse(savedState) : [];
   });
   const [expand, setExpand] = useState(alwaysExpanded);
+  const [sortedTopics, setSortedTopics] = useState(topics);
+  const [animatingTopic, setAnimatingTopic] = useState(null);
 
   useEffect(() => {
     if (alwaysExpanded) {
@@ -17,17 +19,52 @@ function Calculate({ topics, name, onProgressChange, color, alwaysExpanded = fal
     }
   }, [alwaysExpanded]);
 
-  const handleCheckboxChange = (index) => {
-    setCompletedWeightage((prev) => {
-      const updated = [...prev];
-      if (updated.includes(index)) {
-        updated.splice(updated.indexOf(index), 1);
-      } else {
-        updated.push(index);
-      }
-      return updated;
-    });
+  // Function to sort topics with completed ones at the bottom
+  const sortTopics = (topicsList, completedList) => {
+    const uncompleted = topicsList.filter((_, index) => !completedList.includes(index));
+    const completed = topicsList.filter((_, index) => completedList.includes(index));
+    return [...uncompleted, ...completed];
   };
+
+  const handleCheckboxChange = (index) => {
+    const isCurrentlyCompleted = completedWeightage.includes(index);
+    
+    if (!isCurrentlyCompleted) {
+      // Set the animating topic when checking
+      setAnimatingTopic(index);
+      
+      // Start the animation sequence
+      setTimeout(() => {
+        setCompletedWeightage((prev) => {
+          const updated = [...prev];
+          updated.push(index);
+          return updated;
+        });
+      }, 1000); // Wait for strikethrough animation
+    } else {
+      // When unchecking, just remove from completed list
+      setCompletedWeightage((prev) => {
+        const updated = [...prev];
+        updated.splice(updated.indexOf(index), 1);
+        return updated;
+      });
+    }
+  };
+
+  // Update sorted topics whenever completedWeightage changes
+  useEffect(() => {
+    setSortedTopics(sortTopics(topics, completedWeightage));
+  }, [completedWeightage, topics]);
+
+  // Clear animation after it's done
+  useEffect(() => {
+    if (animatingTopic !== null) {
+      const timer = setTimeout(() => {
+        setAnimatingTopic(null);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [animatingTopic]);
 
   const calculateProgress = () => {
     const completedSum = completedWeightage.reduce(
@@ -80,52 +117,65 @@ function Calculate({ topics, name, onProgressChange, color, alwaysExpanded = fal
 
       {expand && (
         <div className="flex flex-col gap-4 w-full rounded p-4">
-          {topics.map((topic, index) => (
-            <div
-              className={`flex justify-between w-full items-center rounded-lg py-3 px-4 bg-white shadow-md transition-all duration-200 ${
-                completedWeightage.includes(index)
-                  ? "bg-opacity-5 line-through decoration-white"
-                  : "bg-opacity-20 hover:bg-opacity-25"
-              }`}
-              key={index}
-            >
-              <span className="flex items-center flex-wrap">
-                <label className="relative flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    className="sr-only"
-                    checked={completedWeightage.includes(index)}
-                    onChange={() => handleCheckboxChange(index)}
-                  />
-                  <div className={`w-6 h-6 border-2 rounded-sm transition-all duration-200 ease-in-out ${
-                    completedWeightage.includes(index) 
-                      ? 'border-white bg-white' 
-                      : 'border-white'
-                  }`}>
-                    {completedWeightage.includes(index) && (
-                      <svg className="w-5 h-5 text-black" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    )}
-                  </div>
-                </label>
-                <span className="text-white font-poppins text-base font-medium pl-5 pr-2">{topic.topic}</span>
-              </span>
-              <div className="flex items-center">
-                {!completedWeightage.includes(index) && (
-                  <button
-                    className="bg-yellow-500 hover:bg-yellow-400 text-black px-3 py-1.5 rounded-md flex items-center gap-1.5 text-sm font-medium transition-colors mr-4"
-                    onClick={() => openAiModal(topic.topic)}
-                    aria-label={`Get AI explanation for ${topic.topic}`}
-                  >
-                    <Sparkles className="w-4 h-4" />
-                    AI
-                  </button>
-                )}
-                <span className="text-white font-poppins text-base font-semibold bg-white/10 px-3 py-1 rounded-full">{topic.weightage}</span>
+          {sortedTopics.map((topic, index) => {
+            const originalIndex = topics.findIndex(t => t.topic === topic.topic);
+            const isCompleted = completedWeightage.includes(originalIndex);
+            const isCurrentlyAnimating = animatingTopic === originalIndex;
+            
+            return (
+              <div
+                key={originalIndex}
+                className={`flex justify-between w-full items-center rounded-lg py-3 px-4 bg-white shadow-md ${
+                  isCompleted
+                    ? "bg-opacity-5 line-through decoration-white"
+                    : "bg-opacity-20 hover:bg-opacity-25"
+                }`}
+                style={{
+                  transition: isCurrentlyAnimating ? 'all 1.5s cubic-bezier(0.2, 0.8, 0.2, 1)' : 'none',
+                  transform: isCurrentlyAnimating ? 'translateY(4rem)' : 'translateY(0)',
+                  opacity: isCurrentlyAnimating ? 0 : 1,
+                  position: 'relative',
+                  zIndex: isCurrentlyAnimating ? 0 : 1
+                }}
+              >
+                <span className="flex items-center flex-wrap">
+                  <label className="relative flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only"
+                      checked={isCompleted}
+                      onChange={() => handleCheckboxChange(originalIndex)}
+                    />
+                    <div className={`w-6 h-6 border-2 rounded-sm transition-all duration-200 ease-in-out ${
+                      isCompleted 
+                        ? 'border-white bg-white' 
+                        : 'border-white'
+                    }`}>
+                      {isCompleted && (
+                        <svg className="w-5 h-5 text-black" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      )}
+                    </div>
+                  </label>
+                  <span className="text-white font-poppins text-base font-medium pl-5 pr-2">{topic.topic}</span>
+                </span>
+                <div className="flex items-center">
+                  {!isCompleted && (
+                    <button
+                      className="bg-yellow-500 hover:bg-yellow-400 text-black px-3 py-1.5 rounded-md flex items-center gap-1.5 text-sm font-medium transition-colors mr-4"
+                      onClick={() => openAiModal(topic.topic)}
+                      aria-label={`Get AI explanation for ${topic.topic}`}
+                    >
+                      <Sparkles className="w-4 h-4" />
+                      AI
+                    </button>
+                  )}
+                  <span className="text-white font-poppins text-base font-semibold bg-white/10 px-3 py-1 rounded-full">{topic.weightage}</span>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </>
