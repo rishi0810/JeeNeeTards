@@ -93,5 +93,5 @@ For any queries or suggestions, feel free to reach out:
 ---
 
 <div align="center">
-  <sub>Built Rishi Raj</sub>
+  <sub>Built by Rishi Raj</sub>
 </div>

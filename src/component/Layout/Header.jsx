@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { SquareLibrary } from 'lucide-react';
+import { SquareLibrary, Menu, X } from 'lucide-react';
+import logo from '../../assets/logo.svg';
+
 const Header = () => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
+    setIsMenuOpen(!isMenuOpen);
   };
 
   const closeMenu = () => {
@@ -36,7 +38,7 @@ const Header = () => {
       <header className="fixed top-6 left-0 right-0 mx-auto max-w-7xl z-50 px-4">
         <div className="backdrop-blur-md bg-white/5 rounded-2xl shadow-lg border border-white/10 flex flex-row justify-between py-4 px-8 hover:shadow-xl hover:bg-white/[0.07] transition-all duration-300">
           <div className="flex flex-row items-center gap-2">
-            <img src="./src/assets/logo.svg" alt="logo" className="text-slate-300 w-8 h-8" />
+            <img src={logo} alt="logo" className="text-slate-300 w-9 h-9" />
             <Link
               to="/"
               className="text-xl font-bold p-1"
