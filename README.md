@@ -11,7 +11,7 @@
 
 <div align="center">
   <a href="https://jeeneetardsv1.vercel.app/">
-    <img src="./src/assets/logo.svg" alt="Visit Website" />
+    <img src="./src/assets/logo.svg" alt="Visit Website" width="100" height="100" />
   </a>
 </div>
 
