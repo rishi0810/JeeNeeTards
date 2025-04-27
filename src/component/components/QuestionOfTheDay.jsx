@@ -8,6 +8,7 @@ function QuestionOfTheDay() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [selected, setSelected] = useState(null);
+  const todayKey = new Date().toISOString().split('T')[0];
 
   useEffect(() => {
     const openHandler = () => setShow(true);
@@ -16,10 +17,13 @@ function QuestionOfTheDay() {
   }, []);
 
   useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
     const stored = JSON.parse(localStorage.getItem('questionOfTheDay') || 'null');
-    if (stored && stored.date === today) {
+    if (stored && stored.date === todayKey) {
       setQuestionData(stored);
+      const savedAnswer = JSON.parse(localStorage.getItem(`answer_${todayKey}`) || 'null');
+      if (typeof savedAnswer === 'number') {
+        setSelected(savedAnswer);
+      }
       return;
     }
 
@@ -82,7 +86,7 @@ function QuestionOfTheDay() {
           console.error('Error parsing AI JSON:', parseError, jsonString);
           throw new Error('Failed to parse AI question response');
         }
-        const result = { ...parsed, date: today };
+        const result = { ...parsed, date: todayKey };
         localStorage.setItem('questionOfTheDay', JSON.stringify(result));
         setQuestionData(result);
       } catch (err) {
@@ -111,7 +115,12 @@ function QuestionOfTheDay() {
               {questionData.options.map((opt, idx) => (
                 <li key={idx}>
                   <button
-                    onClick={() => selected === null && setSelected(idx)}
+                    onClick={() => {
+                      if (selected === null) {
+                        setSelected(idx);
+                        localStorage.setItem(`answer_${todayKey}`, JSON.stringify(idx));
+                      }
+                    }}
                     disabled={selected !== null}
                     className={`w-full text-left px-4 py-2 border rounded ${
                       selected === idx

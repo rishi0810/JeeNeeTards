@@ -2,12 +2,11 @@ import React from "react";
 import { ListCheck, User, Library, BookOpenCheck, Github, Users } from "lucide-react";
 import Courses from "./Courses";
 import { NavLink } from "react-router-dom";
-import QuestionOfTheDay from '../components/QuestionOfTheDay';
+// import QuestionOfTheDay from '../components/QuestionOfTheDay';
 
 function Home() {
   return (
     <>
-      <QuestionOfTheDay />
       <div className="bg-gradient-to-b from-zinc-950 to-zinc-900 flex flex-col justify-evenly items-center gap-40 w-full py-40">
         <section className="flex flex-col gap-3 items-center">
           <p className="text-4xl w-4/6 text-white text-center font-poppins font-bold">
