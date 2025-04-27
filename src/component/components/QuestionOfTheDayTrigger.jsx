@@ -14,7 +14,7 @@ export default function QuestionOfTheDayTrigger() {
         >
           <Lightbulb size={28} />
         </button>
-        <div className="absolute bottom-full w-16 right-0 mb-1 hidden group-hover:block bg-black text-white text-xs rounded px-2 py-1 z-20">
+        <div className="absolute border border-yellow-300 w-44 right-0 mr-16 hidden group-hover:block bg-black text-white text-s rounded px-2 py-1 z-9999">
           Question of the Day
         </div>
       </div>
