@@ -103,13 +103,13 @@ function Calculate({ topics, name, onProgressChange, color, alwaysExpanded = fal
             return (
               <div
                 key={originalIndex}
-                className={`flex justify-between w-full items-center rounded-lg py-3 px-4 bg-white shadow-md ${
+                className={`flex flex-col sm:flex-row justify-start sm:justify-between items-start sm:items-center w-full rounded-lg bg-white shadow-md p-3 sm:p-4 gap-2 sm:gap-0 ${
                   isCompleted
                     ? "bg-opacity-5 line-through decoration-white"
                     : "bg-opacity-20 hover:bg-opacity-25"
                 }`}
               >
-                <span className="flex items-center flex-wrap">
+                <span className="flex-1 min-w-0 flex items-center flex-wrap">
                   <label className="relative flex items-center cursor-pointer">
                     <input
                       type="checkbox"
@@ -129,12 +129,12 @@ function Calculate({ topics, name, onProgressChange, color, alwaysExpanded = fal
                       )}
                     </div>
                   </label>
-                  <span className="text-white font-poppins text-base font-medium pl-5 pr-2">{topic.topic}</span>
+                  <span className="text-white font-poppins text-base font-medium pl-3 sm:pl-5 pr-2 break-words">{topic.topic}</span>
                 </span>
-                <div className="flex items-center">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-4">
                   {!isCompleted && (
                     <button
-                      className="bg-yellow-500 hover:bg-yellow-400 text-black px-3 py-1.5 rounded-md flex items-center gap-1.5 text-sm font-medium transition-colors mr-4"
+                      className="bg-yellow-500 hover:bg-yellow-400 text-black px-2 sm:px-3 py-1 rounded-md flex items-center gap-1 text-sm sm:text-base font-medium transition-colors"
                       onClick={() => openAiModal(topic.topic)}
                       aria-label={`Get AI explanation for ${topic.topic}`}
                     >
@@ -142,7 +142,7 @@ function Calculate({ topics, name, onProgressChange, color, alwaysExpanded = fal
                       AI
                     </button>
                   )}
-                  <span className="text-white font-poppins text-base font-semibold bg-white/10 px-3 py-1 rounded-full">{topic.weightage}</span>
+                  <span className="text-white font-poppins text-base font-semibold bg-white/10 px-3 py-1 rounded-full whitespace-nowrap">{topic.weightage}</span>
                 </div>
               </div>
             );

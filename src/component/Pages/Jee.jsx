@@ -16,8 +16,7 @@ function Jee() {
   }, [math_marks, chemistry_marks, physics_marks]);
 
   return (
-    <div className="w-full bg-gradient-to-b from-zinc-950 to-zinc-900 min-h-screen flex flex-col md:flex-row justify-evenly items-start gap-8 p-5">
-      {/* Subjects Section */}
+    <div className="w-full bg-gradient-to-b from-zinc-950 to-zinc-900 min-h-screen flex flex-col md:flex-row justify-evenly items-start gap-6 md:gap-8 p-4 md:p-5">
       <div className="flex flex-col gap-4 w-full md:w-1/2 p-6 items-center backdrop-blur-sm bg-white/5 rounded-3xl border border-white/10 shadow-xl transition-all duration-300 hover:bg-white/[0.07]">
         <div className="w-full flex items-center justify-between mb-4">
           <div className="space-y-1">
@@ -32,7 +31,6 @@ function Jee() {
           </div>
         </div>
         
-        {/* Subject Tabs */}
         <div className="flex w-full border-b border-white/10 mb-4">
           {["Mathematics", "Chemistry", "Physics"].map((subject) => (
             <button
@@ -88,7 +86,6 @@ function Jee() {
         </div>
       </div>
 
-      {/* Progress Section */}
       <div className="flex flex-col gap-6 p-6 w-full md:w-auto backdrop-blur-sm bg-white/5 rounded-3xl border border-white/10 shadow-xl transition-all duration-300 hover:bg-white/[0.07]">
         <div className="space-y-1">
           <h2 className="text-3xl font-semibold bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-transparent">
@@ -103,10 +100,10 @@ function Jee() {
             <span className="text-white font-semibold text-lg">300</span>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 p-6 bg-white/10 rounded-xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 p-6 bg-white/10 rounded-xl">
             <div className="transition-all duration-300 hover:scale-105 hover:-rotate-12">
               <CircularProgressbar
-                className="w-36 h-36"
+                className="w-24 h-24 md:w-36 md:h-36"
                 styles={buildStyles({
                   textColor: "#f0f9ff",
                   pathColor: "#f59e0b",
@@ -120,7 +117,7 @@ function Jee() {
             </div>
             <div className="transition-all duration-300 hover:scale-105 hover:rotate-12">
               <CircularProgressbar
-                className="w-36 h-36"
+                className="w-24 h-24 md:w-36 md:h-36"
                 styles={buildStyles({
                   textColor: "#f0f9ff",
                   pathColor: "#f59e0b",
@@ -132,9 +129,9 @@ function Jee() {
                 text={`Chem: ${Math.round(chemistry_marks)}`}
               />
             </div>
-            <div className="transition-all duration-300 hover:scale-105 col-span-2 mx-auto hover:-translate-y-2">
+            <div className="transition-all duration-300 hover:scale-105 md:col-span-2 mx-auto hover:-translate-y-2">
               <CircularProgressbar
-                className="w-36 h-36"
+                className="w-24 h-24 md:w-36 md:h-36"
                 styles={buildStyles({
                   textColor: "#f0f9ff",
                   pathColor: "#f59e0b",

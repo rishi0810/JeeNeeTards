@@ -22,9 +22,8 @@ function Neet() {
   }, [botany_marks, chemistry_marks, zoology_marks, physics_marks]);
 
   return (
-    <div className="w-full bg-gradient-to-b from-zinc-950 to-zinc-900 min-h-screen flex flex-col md:flex-row justify-evenly items-start gap-8 p-5">
-      {/* Subjects Section */}
-      <div className="flex flex-col gap-4 w-full md:w-1/2 p-6 items-center backdrop-blur-sm bg-white/5 rounded-3xl border border-white/10 shadow-xl transition-all duration-300 hover:bg-white/[0.07]">
+    <div className="w-full bg-gradient-to-b from-zinc-950 to-zinc-900 min-h-screen flex flex-col md:flex-row justify-evenly items-start gap-6 md:gap-8 p-4 md:p-5">
+      <div className="flex flex-col gap-4 w-full md:w-1/2 p-4 md:p-6 items-center backdrop-blur-sm bg-white/5 rounded-3xl border border-white/10 shadow-xl transition-all duration-300 hover:bg-white/[0.07]">
         <div className="w-full flex items-center justify-between mb-4">
           <div className="space-y-1">
             <span className="text-3xl font-semibold text-blue-600 bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
@@ -36,10 +35,9 @@ function Neet() {
             <div className="text-slate-300 text-sm font-medium">Maximum Score</div>
             <div className="text-blue-500 font-semibold">720</div>
           </div>
-        </div>
+        </div>  
         
-        {/* Subject Tabs */}
-        <div className="flex w-full border-b border-white/10 mb-4">
+        <div className="flex flex-wrap justify-start gap-2 md:gap-4 w-full border-b border-white/10 mb-4">
           {["Botany", "Chemistry", "Zoology", "Physics"].map((subject) => (
             <button
               key={subject}
@@ -107,8 +105,7 @@ function Neet() {
         </div>
       </div>
 
-      {/* Progress Section */}
-      <div className="flex flex-col gap-6 p-6 w-full md:w-auto backdrop-blur-sm bg-white/5 rounded-3xl border border-white/10 shadow-xl transition-all duration-300 hover:bg-white/[0.07]">
+      <div className="flex flex-col gap-6 p-4 md:p-6 w-full md:w-auto backdrop-blur-sm bg-white/5 rounded-3xl border border-white/10 shadow-xl transition-all duration-300 hover:bg-white/[0.07]">
         <div className="space-y-1">
           <h2 className="text-3xl font-semibold bg-gradient-to-r from-slate-200 to-slate-400 bg-clip-text text-transparent">
             Subject Details
@@ -122,10 +119,10 @@ function Neet() {
             <span className="text-white font-semibold text-lg">720</span>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 p-6 bg-white/10 rounded-xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 p-4 md:p-6 bg-white/10 rounded-xl">
             <div className="transition-all duration-300 hover:scale-105 hover:-rotate-6">
               <CircularProgressbar
-                className="w-36 h-36"
+                className="w-24 h-24 md:w-36 md:h-36"
                 styles={buildStyles({
                   textColor: "#f0f9ff",
                   pathColor: "#2563eb",
@@ -139,7 +136,7 @@ function Neet() {
             </div>
             <div className="transition-all duration-300 hover:scale-105 hover:rotate-6">
               <CircularProgressbar
-                className="w-36 h-36"
+                className="w-24 h-24 md:w-36 md:h-36"
                 styles={buildStyles({
                   textColor: "#f0f9ff",
                   pathColor: "#2563eb",
@@ -153,7 +150,7 @@ function Neet() {
             </div>
             <div className="transition-all duration-300 hover:scale-105 hover:-rotate-6">
               <CircularProgressbar
-                className="w-36 h-36"
+                className="w-24 h-24 md:w-36 md:h-36"
                 styles={buildStyles({
                   textColor: "#f0f9ff",
                   pathColor: "#2563eb",
@@ -167,7 +164,7 @@ function Neet() {
             </div>
             <div className="transition-all duration-300 hover:scale-105 hover:rotate-6">
               <CircularProgressbar
-                className="w-36 h-36"
+                className="w-24 h-24 md:w-36 md:h-36"
                 styles={buildStyles({
                   textColor: "#f0f9ff",
                   pathColor: "#2563eb",
