@@ -103,7 +103,7 @@ function QuestionOfTheDay() {
   if (!show) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+    <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex justify-center items-center z-[9999] p-4">
       <div className="bg-gradient-to-b from-zinc-950 to-zinc-900 rounded-3xl border border-white/10 shadow-2xl w-full max-w-md p-6">
         <h2 className="text-xl font-semibold text-white mb-4">Question of the Day</h2>
         {loading && <p className="text-white">Loading question...</p>}
@@ -122,7 +122,7 @@ function QuestionOfTheDay() {
                       }
                     }}
                     disabled={selected !== null}
-                    className={`w-full text-left px-4 py-2 border rounded ${
+                    className={`w-full text-white text-left px-4 py-2 border rounded ${
                       selected === idx
                         ? (idx === questionData.correctIndex ? 'bg-green-600' : 'bg-red-600')
                         : 'bg-white/10 hover:bg-white/20'
