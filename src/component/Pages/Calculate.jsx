@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { ChevronDown, Sparkles } from "lucide-react";
 import { useAi } from "../../context/AiContext";
 
@@ -11,7 +12,11 @@ function Calculate({ topics, name, onProgressChange, color, alwaysExpanded = fal
   });
   const [expand, setExpand] = useState(alwaysExpanded);
   const [sortedTopics, setSortedTopics] = useState(topics);
-  const [animatingTopic, setAnimatingTopic] = useState(null);
+  const [listRef] = useAutoAnimate({
+    duration: 600,
+    easing: 'ease-in-out',
+    disrespectUserMotionPreference: false
+  });
 
   useEffect(() => {
     if (alwaysExpanded) {
@@ -19,7 +24,6 @@ function Calculate({ topics, name, onProgressChange, color, alwaysExpanded = fal
     }
   }, [alwaysExpanded]);
 
-  // Function to sort topics with completed ones at the bottom
   const sortTopics = (topicsList, completedList) => {
     const uncompleted = topicsList.filter((_, index) => !completedList.includes(index));
     const completed = topicsList.filter((_, index) => completedList.includes(index));
@@ -28,43 +32,18 @@ function Calculate({ topics, name, onProgressChange, color, alwaysExpanded = fal
 
   const handleCheckboxChange = (index) => {
     const isCurrentlyCompleted = completedWeightage.includes(index);
-    
-    if (!isCurrentlyCompleted) {
-      // Set the animating topic when checking
-      setAnimatingTopic(index);
-      
-      // Start the animation sequence
-      setTimeout(() => {
-        setCompletedWeightage((prev) => {
-          const updated = [...prev];
-          updated.push(index);
-          return updated;
-        });
-      }, 1000); // Wait for strikethrough animation
-    } else {
-      // When unchecking, just remove from completed list
-      setCompletedWeightage((prev) => {
-        const updated = [...prev];
-        updated.splice(updated.indexOf(index), 1);
-        return updated;
-      });
-    }
+    setCompletedWeightage((prev) => {
+      if (isCurrentlyCompleted) {
+        return prev.filter((i) => i !== index);
+      } else {
+        return [...prev, index];
+      }
+    });
   };
 
-  // Update sorted topics whenever completedWeightage changes
   useEffect(() => {
     setSortedTopics(sortTopics(topics, completedWeightage));
   }, [completedWeightage, topics]);
-
-  // Clear animation after it's done
-  useEffect(() => {
-    if (animatingTopic !== null) {
-      const timer = setTimeout(() => {
-        setAnimatingTopic(null);
-      }, 1500);
-      return () => clearTimeout(timer);
-    }
-  }, [animatingTopic]);
 
   const calculateProgress = () => {
     const completedSum = completedWeightage.reduce(
@@ -116,11 +95,10 @@ function Calculate({ topics, name, onProgressChange, color, alwaysExpanded = fal
       )}
 
       {expand && (
-        <div className="flex flex-col gap-4 w-full rounded p-4">
+        <div ref={listRef} className="flex flex-col gap-4 w-full rounded p-4">
           {sortedTopics.map((topic, index) => {
             const originalIndex = topics.findIndex(t => t.topic === topic.topic);
             const isCompleted = completedWeightage.includes(originalIndex);
-            const isCurrentlyAnimating = animatingTopic === originalIndex;
             
             return (
               <div
@@ -130,13 +108,6 @@ function Calculate({ topics, name, onProgressChange, color, alwaysExpanded = fal
                     ? "bg-opacity-5 line-through decoration-white"
                     : "bg-opacity-20 hover:bg-opacity-25"
                 }`}
-                style={{
-                  transition: isCurrentlyAnimating ? 'all 1.5s cubic-bezier(0.2, 0.8, 0.2, 1)' : 'none',
-                  transform: isCurrentlyAnimating ? 'translateY(4rem)' : 'translateY(0)',
-                  opacity: isCurrentlyAnimating ? 0 : 1,
-                  position: 'relative',
-                  zIndex: isCurrentlyAnimating ? 0 : 1
-                }}
               >
                 <span className="flex items-center flex-wrap">
                   <label className="relative flex items-center cursor-pointer">
