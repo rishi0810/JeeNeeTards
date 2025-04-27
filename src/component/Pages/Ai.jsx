@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAi } from '../../context/AiContext';
-import { X, Loader, Sparkles, Brain } from 'lucide-react'; // Added additional icons
-import ReactMarkdown from 'react-markdown'; // To render the AI response nicely
+import { X, Loader, Sparkles, Brain } from 'lucide-react'; 
+import ReactMarkdown from 'react-markdown'; 
 
 function Ai() {
   const {
@@ -17,10 +17,9 @@ function Ai() {
   } = useAi();
 
   const [apiKey, setApiKey] = useState('');
-  const [modelId, setModelId] = useState('gemini-1.5-flash-latest'); // Default model
+  const [modelId, setModelId] = useState('gemini-1.5-flash-latest'); 
   const [loadingMessage, setLoadingMessage] = useState('Analyzing your topic...');
 
-  // Effect for loading message cycling
   useEffect(() => {
     if (!loading) return;
     
@@ -42,10 +41,7 @@ function Ai() {
     return () => clearInterval(intervalId);
   }, [loading]);
 
-  // Effect to load API key and model ID from env variables
   useEffect(() => {
-    // IMPORTANT: Ensure these environment variables are set in your .env file
-    // and accessible in your build process (e.g., using Vite's import.meta.env)
     setApiKey(import.meta.env.VITE_GEMINI_API_KEY || '');
     setModelId(import.meta.env.VITE_GEMINI_MODEL_ID || 'gemini-1.5-flash-latest');
 
@@ -55,20 +51,18 @@ function Ai() {
     }
   }, []);
 
-  // Effect to fetch explanation when the modal opens and a topic is selected
   useEffect(() => {
     if (isAiModalOpen && selectedTopic && !explanation && apiKey) {
       const fetchExplanation = async () => {
         setLoading(true);
-        setError(null); // Clear previous errors
+        setError(null); 
 
-        // Define the API endpoint and request structure
         const GENERATE_CONTENT_API = 'generateContent';
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:${GENERATE_CONTENT_API}?key=${apiKey}`;
 
         const requestBody = {
           contents: [{
-            parts: [{ // Correct structure: parts is an array of objects
+            parts: [{ 
               text: `Explain the JEE/NEET topic "${selectedTopic}" in detail for a student. Summarize the key concepts clearly.`
             }]
           }],
@@ -98,8 +92,6 @@ function Ai() {
 
           const data = await response.json();
 
-          // Extract the text explanation - adjust based on actual API response structure
-          // Check candidates array, content, and parts
           const generatedText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
           if (generatedText) {
@@ -122,21 +114,19 @@ function Ai() {
         setError("API Key is missing. Cannot fetch explanation.");
         setLoading(false);
     }
-    // Reset explanation if modal is closed or topic changes without API key
     else if (!isAiModalOpen || (isAiModalOpen && !apiKey)) {
         setExplanation(''); 
         setError(null);
     }
-  }, [isAiModalOpen, selectedTopic, apiKey, modelId, setExplanation, setLoading, setError, explanation]); // Added explanation to dep array
+  }, [isAiModalOpen, selectedTopic, apiKey, modelId, setExplanation, setLoading, setError, explanation]); 
 
   if (!isAiModalOpen) {
-    return null; // Don't render anything if the modal is closed
+    return null; 
   }
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex justify-center items-center z-50 p-4">
       <div className="bg-gradient-to-b from-zinc-950 to-zinc-900 rounded-3xl border border-white/10 shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden">
-        {/* Header */}
         <div className="flex justify-between items-center p-6 border-b border-white/10 bg-white/5">
           <h2 className="text-2xl font-semibold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent flex items-center gap-2">
             <Sparkles className="w-6 h-6 text-blue-400" />
@@ -151,7 +141,6 @@ function Ai() {
           </button>
         </div>
 
-        {/* Content Area */}
         <div className="p-8 overflow-y-auto flex-grow">
           {loading && (
             <div className="flex flex-col items-center justify-center h-80 text-white space-y-6">
@@ -185,7 +174,6 @@ function Ai() {
            )}
         </div>
 
-        {/* Footer */}
         <div className="p-5 border-t border-white/10 bg-white/5 flex justify-between items-center">
           <span className="text-xs text-slate-400"></span>
           <button

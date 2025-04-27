@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { SquareLibrary, Menu, X } from 'lucide-react';
+import { SquareLibrary, Menu, X, Lightbulb } from 'lucide-react';
 import logo from '../../assets/logo.svg';
 
 const Header = () => {
@@ -50,7 +50,13 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Hamburger Menu Button */}
+          <button
+            className="md:hidden text-yellow-400 p-2 hover:text-yellow-300 transition-colors duration-200"
+            onClick={() => window.dispatchEvent(new Event('openQOTD'))}
+            aria-label="Open Question of the Day"
+          >
+            <Lightbulb size={24} />
+          </button>
           <button
             className="md:hidden text-slate-300 text-lg p-2 rounded-lg hover:bg-white/5 hover:text-white transition-colors duration-200"
             onClick={toggleMenu}

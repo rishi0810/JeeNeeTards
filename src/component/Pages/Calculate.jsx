@@ -46,20 +46,23 @@ function Calculate({ topics, name, onProgressChange, color, alwaysExpanded = fal
   }, [completedWeightage, topics]);
 
   const calculateProgress = () => {
-    const completedSum = completedWeightage.reduce(
-      (sum, index) => sum + topics[index].weightage,
-      0
-    );
-    return Math.round((completedSum / totalWeightage) * 100);
+    const completedSum = completedWeightage.reduce((sum, index) => {
+      const topicItem = topics[index];
+      if (!topicItem || typeof topicItem.weightage !== 'number') return sum;
+      return sum + topicItem.weightage;
+    }, 0);
+    return totalWeightage > 0
+      ? Math.round((completedSum / totalWeightage) * 100)
+      : 0;
   };
 
   useEffect(() => {
-    const completedSum = completedWeightage.reduce(
-      (sum, index) => sum + topics[index].weightage,
-      0
-    );
+    const completedSum = completedWeightage.reduce((sum, index) => {
+      const topicItem = topics[index];
+      if (!topicItem || typeof topicItem.weightage !== 'number') return sum;
+      return sum + topicItem.weightage;
+    }, 0);
     onProgressChange(completedSum);
-
     localStorage.setItem(`completed_${name}`, JSON.stringify(completedWeightage));
   }, [completedWeightage, onProgressChange, topics, totalWeightage, name]);
 

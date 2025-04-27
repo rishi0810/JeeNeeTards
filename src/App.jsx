@@ -6,6 +6,8 @@ import { AiProvider } from './context/AiContext'
 import Ai from './component/Pages/Ai'
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import QuestionOfTheDay from './component/components/QuestionOfTheDay';
+import QuestionOfTheDayTrigger from './component/components/QuestionOfTheDayTrigger';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -21,6 +23,8 @@ function App() {
   return (
   <AiProvider>
     <ScrollToTop />
+    <QuestionOfTheDayTrigger />
+    <QuestionOfTheDay />
     <div style={{ userSelect: 'none' }}>
       <Header />
       <Outlet />
