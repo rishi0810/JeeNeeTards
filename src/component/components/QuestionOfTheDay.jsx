@@ -58,7 +58,7 @@ function QuestionOfTheDay() {
         return;
       }
       const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent?key=${apiKey}`;
-      const prompt = `Generate a multiple-choice question on the topic "${randomTopic}". Provide only a JSON object with keys: question, options (array of 4 strings), correctIndex (0-3).`; 
+      const prompt = `Generate a multiple-choice question on the topic "${randomTopic}", this is question will be used for JEE/NEET students - question of the day so maintain the relevency and difficulty accordingly. Provide only a JSON object with keys: question, options (array of 4 strings), correctIndex (0-3).`; 
       try {
         const res = await fetch(API_URL, {
           method: 'POST',
